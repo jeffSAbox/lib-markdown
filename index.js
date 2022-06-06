@@ -2,7 +2,8 @@ import chalk from 'chalk';
 import { pegarArquivoTexto } from './src/tratamentoTexto/pegarArquivoTexto.js';
 import { extrairLinks } from './src/tratamentoTexto/extrairLinks.js';
 
-const texto = pegarArquivoTexto("./arquivos/texto1.md");
+const processos = process.argv;
+const texto = pegarArquivoTexto(processos[2]);
 const links = extrairLinks(texto);
 
 console.log(chalk.yellowBright(texto));
