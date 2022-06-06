@@ -1,11 +1,11 @@
 import fs from 'fs';
 import { lancarError } from '../error/lancarError.js';
 
-export function pegarArquivoTexto(caminhoArquivo) 
+export async function pegarArquivoTexto(caminhoArquivo) 
 {
     try 
     {
-        return fs.readFileSync(caminhoArquivo, 'utf-8');        
+        return await fs.promises.readFile(caminhoArquivo, 'utf-8');        
     } 
     catch (error)
     {

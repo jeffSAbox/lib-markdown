@@ -11,7 +11,7 @@ export function extrairLinks(texto) {
             arr_links.push({ [temp[1]]: temp[2] });
         }
 
-        return arr_links;
+        return arr_links.length === 0 ? "Nenhum link foi encontrado" : arr_links;
     } 
     catch (error) 
     {
