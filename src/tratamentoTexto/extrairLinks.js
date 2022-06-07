@@ -1,6 +1,8 @@
 import { lancarError } from '../error/lancarError.js';
+import { validarLinks } from './validarLinks.js';
 
-export function extrairLinks(texto) {
+export async function extrairLinks(texto, opcao = "") 
+{
     try 
     {
         const regexp = /\[([^\]]*)\]\((https?:\/\/[^\)]*)\)/gm;
@@ -11,7 +13,24 @@ export function extrairLinks(texto) {
             arr_links.push({ [temp[1]]: temp[2] });
         }
 
-        return arr_links.length === 0 ? "Nenhum link foi encontrado" : arr_links;
+        if( arr_links.length === 0 )
+        {
+            return "Nenhum link foi encontrado";
+        }
+        else if( opcao == "validar" )
+        {
+            const statusResultado = await validarLinks(arr_links);
+            const arr_links_status = arr_links.map((objeto, indice) => {
+                return {
+                    ...objeto,
+                    status: statusResultado[indice]
+                }
+            });
+            arr_links = arr_links_status;
+        }
+        
+        return arr_links;
+
     } 
     catch (error) 
     {
